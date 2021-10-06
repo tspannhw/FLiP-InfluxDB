@@ -16,12 +16,13 @@ docker pull influxdb
 ```
 bin/pulsar-admin sink stop --name influxdb-sink-jetson --namespace default --tenant public
 bin/pulsar-admin sinks delete --tenant public --namespace default --name influxdb-sink-jetson
-bin/pulsar-admin sinks create --archive ./connectors/pulsar-io-influxdb-2.8.0.nar --tenant public --namespace default --name influxdb-sink-jetson --sink-config-file conf/influxcloud.yml --inputs iotjetsonjson --parallelism 1
+bin/pulsar-admin sinks create --archive ./connectors/pulsar-io-influxdb-2.8.0.nar --tenant public --namespace default --name influxdb-sink-jetson --sink-config-file conf/influxcloud.yml --inputs jetsoninflux --parallelism 1
 
 
 bin/pulsar-admin sinks get --tenant public --namespace default --name influxdb-sink-jetson
 bin/pulsar-admin sinks status --tenant public --namespace default --name influxdb-sink-jetson
 
+# topic:  persistent public default jetsoninflux
 
 ```
 
@@ -36,7 +37,7 @@ do
         DATE=$(date +"%Y-%m-%d_%H%M")
         python3 -W ignore /home/nvidia/nvme/minifi-jetson-xavier/demo.py --camera /dev/video0 --network googlenet /home/nvidia/nvme/images/$DATE.jpg  2>/dev/null
 
-        java -jar IoTProducer-1.0-jar-with-dependencies.jar --serviceUrl pulsar://192.168.1.181:6650 --topic 'iotjetsonjson' --message "`tail -1 /home/nvidia/nvme/logs/demo1.log`"
+# --serviceUrl pulsar://192.168.1.181:6650 --topic 'jetsoninflux' --message "`tail -1 /home/nvidia/nvme/logs/influx.log`"
 
 done
 ```
