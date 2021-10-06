@@ -25,6 +25,21 @@ bin/pulsar-admin sinks status --tenant public --namespace default --name influxd
 
 ```
 
+## Generate Edge AI IoT Data
+
+```
+#!/bin/bash
+
+while :
+do
+
+        DATE=$(date +"%Y-%m-%d_%H%M")
+        python3 -W ignore /home/nvidia/nvme/minifi-jetson-xavier/demo.py --camera /dev/video0 --network googlenet /home/nvidia/nvme/images/$DATE.jpg  2>/dev/null
+
+        java -jar IoTProducer-1.0-jar-with-dependencies.jar --serviceUrl pulsar://192.168.1.181:6650 --topic 'iotjetsonjson' --message "`tail -1 /home/nvidia/nvme/logs/demo1.log`"
+
+done
+```
 
 ## Resources
 
@@ -32,3 +47,5 @@ bin/pulsar-admin sinks status --tenant public --namespace default --name influxd
 * https://hub.docker.com/_/influxdb
 * https://pulsar.apache.org/docs/en/io-influxdb-sink/
 * https://github.com/influxdata/nifi-influxdb-bundle
+* https://github.com/tspannhw/minifi-xaviernx
+* https://www.datainmotion.dev/2020/06/unboxing-most-amazing-edge-ai-device.html
