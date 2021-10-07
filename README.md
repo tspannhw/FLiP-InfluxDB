@@ -15,6 +15,8 @@ docker pull influxdb
 
 ```
 bin/pulsar-admin topics create persistent://public/default/jetsoninflux
+
+bin/pulsar-client consume "persistent://public/default/jetsoninflux" -s "influxr" -n 0
 ```
 
 ## Cloud
