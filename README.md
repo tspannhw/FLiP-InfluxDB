@@ -11,6 +11,12 @@ docker pull influxdb
 
 ```
 
+## Pulsar Setup
+
+```
+bin/pulsar-admin topics create persistent://public/default/jetsoninflux
+```
+
 ## Cloud
 
 ```
