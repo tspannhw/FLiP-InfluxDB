@@ -53,3 +53,4 @@ done
 * https://github.com/influxdata/nifi-influxdb-bundle
 * https://github.com/tspannhw/minifi-xaviernx
 * https://www.datainmotion.dev/2020/06/unboxing-most-amazing-edge-ai-device.html
+* https://github.com/tspannhw/FLiP-edgeai
