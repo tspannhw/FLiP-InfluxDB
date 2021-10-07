@@ -29,6 +29,9 @@ bin/pulsar-admin sinks status --tenant public --namespace default --name influxd
 ## Generate Edge AI IoT Data
 
 ```
+
+pip3 install paho-mqtt
+
 #!/bin/bash
 
 while :
