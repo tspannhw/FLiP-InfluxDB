@@ -62,3 +62,4 @@ done
 * https://github.com/tspannhw/FLiP-edgeai
 * https://github.com/tspannhw/FLiP-CloudIngest
 * https://github.com/tspannhw/StreamingAnalyticsUsingFlinkSQL
+* https://www.influxdata.com/blog/nvidia-jetson-series-part-1-jetson-stats/
