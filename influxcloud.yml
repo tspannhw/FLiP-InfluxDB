@@ -1,7 +1,7 @@
 configs:
     influxdbUrl: "https://us-location.aws.cloud2.influxdata.com"
     organization: "myorgiscool"
-    bucket: "pulsar"
+    bucket: "pulsar2"
     token: "somelongtoken"
     precision: "ns"
     logLevel: "NONE"
