@@ -60,3 +60,5 @@ done
 * https://github.com/tspannhw/minifi-xaviernx
 * https://www.datainmotion.dev/2020/06/unboxing-most-amazing-edge-ai-device.html
 * https://github.com/tspannhw/FLiP-edgeai
+* https://github.com/tspannhw/FLiP-CloudIngest
+* https://github.com/tspannhw/StreamingAnalyticsUsingFlinkSQL
