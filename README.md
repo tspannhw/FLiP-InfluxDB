@@ -69,3 +69,5 @@ done
 * https://github.com/tspannhw/StreamingAnalyticsUsingFlinkSQL
 * https://www.influxdata.com/blog/nvidia-jetson-series-part-1-jetson-stats/
 * https://github.com/rbonghi/jetson_stats/wiki/library
+* https://docs.influxdata.com/influxdb/cloud/write-data/no-code/use-telegraf/
+* https://www.influxdata.com/blog/mqtt-topic-payload-parsing-telegraf/
