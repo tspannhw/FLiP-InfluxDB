@@ -24,10 +24,6 @@ currenttime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 starttime = datetime.datetime.now().strftime('%m/%d/%Y %H:%M:%S')
 start = time.time()
 
-try:
-  
-i = 0
-
 external_IP_and_port = ('198.41.0.4', 53)  # a.root-servers.net
 socket_family = socket.AF_INET
 
@@ -80,10 +76,10 @@ while (1):
     row = { }
     uniqueid = 'pulsar1_uuid_{0}_{1}'.format(randomword(3),strftime("%Y%m%d%H%M%S",gmtime()))
     uuid2 = '{0}_{1}'.format(strftime("%Y%m%d%H%M%S",gmtime()),uuid.uuid4())
-    cpu_temps = [get_cpu_temperature()] * 5
-    cpu_temp = round(get_cpu_temperature(),1)
-    cpu_temps = cpu_temps[1:] + [cpu_temp]
-    avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
+    #cpu_temps = [get_cpu_temperature()] * 5
+    #cpu_temp = round(get_cpu_temperature(),1)
+    #cpu_temps = cpu_temps[1:] + [cpu_temp]
+    #avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
     end = time.time()
 
     # https://www.influxdata.com/blog/mqtt-topic-payload-parsing-telegraf/
@@ -106,7 +102,8 @@ while (1):
     row['value'] = psutil.cpu_percent(interval=1)
     json_string = json.dumps(row) 
     json_string = json_string.strip()
-    client.connect("pulsar1", 1883, 180)
+    json_string = "cpup value=" + str(psutil.cpu_percent(interval=1))
+    client.connect("192.168.1.230", 1883, 180)
     client.publish("persistent://public/default/telegrafcpu", payload=json_string, qos=0, retain=True)
     print("sent telegrafcpu mqtt: " + json_string) 
     
@@ -117,16 +114,19 @@ while (1):
     row['value'] = psutil.virtual_memory().percent
     json_string = json.dumps(row) 
     json_string = json_string.strip()
+    json_string = "mem value=" + str(psutil.virtual_memory().percent)
     client.publish("persistent://public/default/telegrafmem", payload=json_string, qos=0, retain=True)
     print("sent telegrafmem mqtt: " + json_string) 
     
     #sensors
+    temps = psutil.sensors_temperatures(fahrenheit=True)
     row = { }
     row['device_id'] = 'pulsar1'
     row['groups'] = 'things'
-    row['value'] = cpu_temp
+    row['value'] = temps['acpitz'][0].current
     json_string = json.dumps(row) 
     json_string = json_string.strip()
+    json_string = "sensors value=" + str(temps['acpitz'][0].current)
     client.publish("persistent://public/default/sensors", payload=json_string, qos=0, retain=True)
     print("sent telegrafmem sensors: " + json_string) 
 
@@ -134,5 +134,3 @@ while (1):
     fa.write(json_string + "\n")
     fa.close()
     time.sleep(1)
-
-    i = i + 1
